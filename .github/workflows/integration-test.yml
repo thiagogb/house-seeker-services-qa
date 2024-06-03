@@ -9,6 +9,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  repository_dispatch:
+    types: [ "remote-trigger" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -16,7 +18,9 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  execute:
+    name: Prepare And Execute Tests
+
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -71,7 +75,7 @@ jobs:
             --name house-seeker-services-data-test \
             -e EXTRA_JAVA_ARGS="-Dspring.flyway.locations=classpath:db/migration/schema,classpath:db/migration/test" \
             --network host \
-            aquinate/house-seeker-data:latest
+            aquinate/house-seeker-data:${{ github.event.client_payload.tag || 'latest' }}
 
       # Wait Data to be healthy
       - name: Waiting Data container healthcheck
@@ -86,7 +90,7 @@ jobs:
           docker run -d \
             --name house-seeker-services-api-test \
             --network host \
-            aquinate/house-seeker-api:latest
+            aquinate/house-seeker-api:${{ github.event.client_payload.tag || 'latest' }}
 
       # Wait API to be healthy
       - name: Waiting API container healthcheck
@@ -105,13 +109,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-    
+
       - name: Run Playwright tests
         run: API_URL=http://localhost:8080 CI=true npx playwright test
-    
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
