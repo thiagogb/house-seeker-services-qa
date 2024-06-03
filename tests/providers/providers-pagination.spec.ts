@@ -4,10 +4,9 @@ import _ from 'lodash';
 test.describe(`/api/graph: query { providers }`, () => {
 
     const slices = [
-        {pageNumber: 1, id: {start: 1, end: 20}},
-        {pageNumber: 2, id: {start: 21, end: 40}},
-        {pageNumber: 3, id: {start: 41, end: 60}},
-        {pageNumber: 4, id: {start: 61, end: 65}}
+        {pageNumber: 1, id: {start: 10000, end: 10002}},
+        {pageNumber: 2, id: {start: 10003, end: 10005}},
+        {pageNumber: 3, id: {start: 10006, end: 10006}}
     ];
 
     for (const params of slices) {
@@ -18,7 +17,7 @@ test.describe(`/api/graph: query { providers }`, () => {
                         providers(
                             input: {
                                 orders: { id: { index: 1, direction: ASC } }
-                                pagination: { pageSize: 20, pageNumber: ${params.pageNumber} }
+                                pagination: { pageSize: 3, pageNumber: ${params.pageNumber} }
                             }
                         ) {
                             rows { id }
@@ -37,10 +36,10 @@ test.describe(`/api/graph: query { providers }`, () => {
                     providers: {
                         rows: _.range(params.id.start, params.id.end + 1).map(id => ({id: `${id}`})),
                         pagination: {
-                            pageSize: 20,
+                            pageSize: 3,
                             pageNumber: params.pageNumber,
-                            totalPages: 4,
-                            totalRows: 65
+                            totalPages: 3,
+                            totalRows: 7
                         }
                     }
                 }

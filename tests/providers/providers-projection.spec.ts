@@ -26,58 +26,69 @@ test.describe(`/api/graph: query { providers }`, () => {
         expect(json).toEqual({
             "data": {
                 "providers": {
-                    "rows": [{
-                        "id": "1",
-                        "name": "Oliveira Imóveis",
-                        "siteUrl": "https://www.oliveiraimoveissm.com.br",
-                        "dataUrl": "https://www.oliveiraimoveissm.com.br/imoveis/a-venda/",
-                        "mechanism": "JETIMOB_V1",
-                        "params": "",
-                        "cronExpression": "0 0 9 ? * MON,WED,FRI *",
-                        "logoUrl": "http://127.0.0.1:8080/api/rest/providers/1/logo",
-                        "active": false
-                    }, {
-                        "id": "2",
-                        "name": "Fernando Flores",
-                        "siteUrl": "https://www.fernandoflores.com.br",
-                        "dataUrl": "https://www.fernandoflores.com.br/imoveis/a-venda/",
-                        "mechanism": "JETIMOB_V1",
-                        "params": "",
-                        "cronExpression": "0 0 9 ? * MON,WED,FRI *",
-                        "logoUrl": null,
-                        "active": false
-                    }, {
-                        "id": "3",
-                        "name": "Toneto Empreendimentos",
-                        "siteUrl": "https://www.tonetoempreendimentos.com.br",
-                        "dataUrl": "https://www.tonetoempreendimentos.com.br/imoveis/a-venda/",
-                        "mechanism": "JETIMOB_V1",
-                        "params": "",
-                        "cronExpression": "0 0 9 ? * MON,WED,FRI *",
-                        "logoUrl": null,
-                        "active": false
-                    }, {
-                        "id": "4",
-                        "name": "Hanover Imobiliária",
-                        "siteUrl": "https://www.imobiliariahanover.com.br",
-                        "dataUrl": "https://www.imobiliariahanover.com.br/imoveis/a-venda/",
-                        "mechanism": "JETIMOB_V1",
-                        "params": "",
-                        "cronExpression": "0 0 9 ? * MON,WED,FRI *",
-                        "logoUrl": "http://127.0.0.1:8080/api/rest/providers/4/logo",
-                        "active": false
-                    }, {
-                        "id": "5",
-                        "name": "Zimbro Imóveis",
-                        "siteUrl": "https://www.zimbroimoveis.com.br",
-                        "dataUrl": "https://www.zimbroimoveis.com.br/imoveis/a-venda/",
-                        "mechanism": "JETIMOB_V1",
-                        "params": "",
-                        "cronExpression": "0 0 9 ? * MON,WED,FRI *",
-                        "logoUrl": null,
-                        "active": false
-                    }],
-                    "pagination": {"pageSize": 5, "pageNumber": 1, "totalPages": 13, "totalRows": 65}
+                    "rows": [
+                        {
+                            "id": "10000",
+                            "name": "Oliveira Imóveis",
+                            "siteUrl": "https://www.oliveiraimoveissm.com.br",
+                            "dataUrl": "https://www.oliveiraimoveissm.com.br/imoveis/a-venda/",
+                            "mechanism": "JETIMOB_V1",
+                            "params": "",
+                            "cronExpression": "0 0 0 ? * * *",
+                            "logoUrl": null,
+                            "active": true
+                        },
+                        {
+                            "id": "10001",
+                            "name": "Cancian Imóveis",
+                            "siteUrl": "https://cancianimoveis.com.br",
+                            "dataUrl": "https://d3gy91ixuib5mq.cloudfront.net/",
+                            "mechanism": "UNIVERSAL_SOFTWARE",
+                            "params": "",
+                            "cronExpression": "0 0 0 ? * * *",
+                            "logoUrl": null,
+                            "active": true
+                        },
+                        {
+                            "id": "10002",
+                            "name": "Café Imobiliária",
+                            "siteUrl": "https://www.cafeimobiliaria.com.br",
+                            "dataUrl": "https://www.cafeimobiliaria.com.br/jsons/",
+                            "mechanism": "SUPER_LOGICA",
+                            "params": "{\"jsonFile\":\"cafeimoveis.json\"}",
+                            "cronExpression": "0 0 0 ? * * *",
+                            "logoUrl": null,
+                            "active": true
+                        },
+                        {
+                            "id": "10003",
+                            "name": "Maiquel Oliveira",
+                            "siteUrl": "https://maiqueloliveira.com.br",
+                            "dataUrl": "",
+                            "mechanism": "JETIMOB_V2",
+                            "params": "{\"subTypes\":[\"Apartamento\",\"Casa\",\"Casa de Condomínio\",\"Cobertura\",\"Sobrado\",\"Terreno\"]}",
+                            "cronExpression": "0 0 0 ? * * *",
+                            "logoUrl": null,
+                            "active": true
+                        },
+                        {
+                            "id": "10004",
+                            "name": "Luiz Coelho Imóveis",
+                            "siteUrl": "https://www.luizcoelhoimoveis.com.br",
+                            "dataUrl": "",
+                            "mechanism": "JETIMOB_V3",
+                            "params": "",
+                            "cronExpression": "0 0 0 ? * * *",
+                            "logoUrl": null,
+                            "active": true
+                        }
+                    ],
+                    "pagination": {
+                        "pageSize": 5,
+                        "pageNumber": 1,
+                        "totalPages": 2,
+                        "totalRows": 7
+                    }
                 }
             }
         });
