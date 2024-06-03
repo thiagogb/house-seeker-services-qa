@@ -39,6 +39,13 @@ jobs:
           --network host \
           postgres:16.1-alpine
 
+      # Wait PostgreSQL to be healthy
+      - name: Waiting PostgreSQL container healthcheck
+        run: |
+          until [ "`docker inspect -f {{.State.Health.Status}} house-seeker-test-db`"=="healthy" ]; do
+            sleep 0.1;
+          done;
+
       # Prepare RabbitMQ container
       - name: Run RabbitMQ container
         run: |
@@ -50,6 +57,13 @@ jobs:
           --network host \
           rabbitmq:3.13.0-alpine
 
+      # Wait RabbitMQ to be healthy
+      - name: Waiting RabbitMQ container healthcheck
+        run: |
+          until [ "`docker inspect -f {{.State.Health.Status}} house-seeker-messaging-test`"=="healthy" ]; do
+            sleep 0.1;
+          done;
+
       # Prepare Data Container
       - name: Run Data Container
         run: |
@@ -59,6 +73,13 @@ jobs:
             --network host \
             aquinate/house-seeker-data:latest
 
+      # Wait Data to be healthy
+      - name: Waiting Data container healthcheck
+        run: |
+          until [ "`docker inspect -f {{.State.Health.Status}} house-seeker-services-data-test`"=="healthy" ]; do
+            sleep 0.1;
+          done;
+
       # Prepare API Container
       - name: Run Data Container
         run: |
@@ -66,6 +87,13 @@ jobs:
             --name house-seeker-services-api-test \
             --network host \
             aquinate/house-seeker-api:latest
+
+      # Wait API to be healthy
+      - name: Waiting API container healthcheck
+        run: |
+          until [ "`docker inspect -f {{.State.Health.Status}} house-seeker-services-api-test`"=="healthy" ]; do
+            sleep 0.1;
+          done;
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.0.2
