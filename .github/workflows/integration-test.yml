@@ -95,7 +95,7 @@ jobs:
 
       - name: Starting Data Application
         working-directory: app/data/target
-        run: nohup java -jar -Dspring.flyway.locations=classpath:db/migration/schema,classpath:db/migration/test data-0.0.1-SNAPSHOT.jar &
+        run: nohup java -jar -Dspring.profiles.active=test data-0.0.1-SNAPSHOT.jar &
 
       - name: Waiting Data Application to Respond
         run: |
@@ -106,7 +106,7 @@ jobs:
 
       - name: Starting API Application
         working-directory: app/api/target
-        run: nohup java -jar api-0.0.1-SNAPSHOT.jar &
+        run: nohup java -jar -Dspring.profiles.active=test api-0.0.1-SNAPSHOT.jar &
 
       - name: Waiting API Application to Respond
         run: |
